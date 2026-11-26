@@ -1,0 +1,12 @@
+[Unit]
+Description=Omarchy workload fit
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/lib/omarchy-fit/fitd.py
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
