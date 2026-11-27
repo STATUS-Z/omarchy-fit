@@ -1,5 +1,6 @@
 [Unit]
 Description=Omarchy workload fit
+Documentation=https://github.com/STATUS-Z/omarchy-fit
 After=multi-user.target
 
 [Service]
@@ -7,6 +8,17 @@ Type=simple
 ExecStart=/usr/bin/python3 /usr/local/lib/omarchy-fit/fitd.py
 Restart=on-failure
 RestartSec=2
+# Writes cgroup controls and reads pagemap/kpageflags, so it stays root.
+User=root
+# /sys/fs/cgroup must stay writable; everything else is read-only to the unit.
+ProtectSystem=strict
+ReadWritePaths=/sys/fs/cgroup /var/lib/omarchy-fit
+ProtectHome=read-only
+PrivateTmp=false
+NoNewPrivileges=true
+# Capabilities actually used: cgroup files under /sys/fs/cgroup are root-owned.
+CapabilityBoundingSet=CAP_SYS_ADMIN CAP_DAC_OVERRIDE
+AmbientCapabilities=
 
 [Install]
 WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+# The guest must run these as written. CRLF in a shell script or a .py shebang
+# breaks on Linux, so no file in this repo is ever allowed to be converted.
+* text=auto eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.service text eol=lf
+*.snippet text eol=lf
+*.md text eol=lf
